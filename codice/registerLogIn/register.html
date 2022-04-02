@@ -185,7 +185,8 @@
             
         </div>
     </div>
-</section><section style="background-color: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif; color:#aaa; font-size:12px; padding: 0; align-items: center; display: flex;">
+</section>
+<section style="background-color: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif; color:#aaa; font-size:12px; padding: 0; align-items: center; display: flex;">
     <p style="flex: 0 0 auto; margin:0; padding-right:1rem;"><a href="https://mobirise.site/w" style="color:#aaa;"></a></p></section>
     <!-- <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>  
     <script src="assets/smoothscroll/smooth-scroll.js"></script>  
@@ -205,22 +206,46 @@
             var tipoUtente=$('#typeUser-form7-1f').val();
             //Per la verifica usare !="" per gli input text e !=null per le selezioni
             if(nome!=""&&cognome!=""&&mail!=""&&telefono!=""&&password!=""&&eta!=""&&genere!=null&&tipoUtente!=null){
-            $.ajax({
-                url:"",
-                method: "POST",
-                dataType: 'json',
-                data: {"nome": nome,"cognome": cognome, "mail": mail, "telefono": telefono,"password": password, "eta": eta, "genere": genere,"tipoUtente": tipoUtente},
-                success: function (data) {
-                    console.log("success", data);
-                    //Aggiungere la verifica mail (Per ora porta subito all'homepage)
-                    window.location.assign("homepage.html");
-                },
-                error: function (data) {
-                    console.log("error", data);
-                },
-            });       
-        }
-    })       
+                if(tipoUtente=="Studente"){
+                    //Sistemare metodo ajax, obbligatorio con post
+                    //Sistemare URL dati
+                    //Sistemare invio dati
+                    $.ajax({
+                        url:"",
+                        method: "POST",
+                        dataType: 'json',
+                        data: {"nome": nome,"cognome": cognome, "mail": mail, "telefono": telefono,"password": password, "eta": eta, "genere": genere,"tipoUtente": tipoUtente},
+                        success: function (data) {
+                        console.log("success", data);
+                            //Aggiungere la verifica mail (Per ora porta subito all'homepage)
+                            window.location.assign("../homeDashboard/HomeStudenti.html");
+                        },
+                        error: function (data) {
+                            console.log("error", data);
+                        },
+                    });
+                
+                }else if(tipoUtente=="Diplomato"){
+                    //Sistemare metodo ajax, obbligatorio con post
+                    //Sistemare URL dati
+                    //Sistemare invio dati
+                    $.ajax({
+                        url:"",
+                        method: "POST",
+                        dataType: 'json',
+                        data: {"nome": nome,"cognome": cognome, "mail": mail, "telefono": telefono,"password": password, "eta": eta, "genere": genere,"tipoUtente": tipoUtente},
+                        success: function (data) {
+                        console.log("success", data);
+                            //Aggiungere la verifica mail (Per ora porta subito all'homepage)
+                            window.location.assign("../homeDashboard/Homestudentidiplomati.html");
+                        },
+                        error: function (data) {
+                            console.log("error", data);
+                        },
+                    });
+                }
+            }
+        })       
     </script>
   
 </body>

@@ -10,7 +10,7 @@
   <meta name="description" content="">
   
   
-  <title>Lista diplomati (studente)P1</title>
+  <title>Lista diplomati </title>
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-grid.min.css">
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-reboot.min.css">
@@ -63,7 +63,7 @@
 
     
 
-    <div class="container-fluid">
+    <div class="container-fluid" id="divListaStudenti">
         <div class="card">
             <div class="card-wrapper">
                 <div class="row align-items-center">
@@ -201,12 +201,76 @@
             </div>
             <div class="row row-copirayt">
                 <p class="mbr-text mb-0 mbr-fonts-style mbr-white align-center display-7">
-                    © Copyright 2025 Mobirise. All Rights Reserved.
+                    
                 </p>
             </div>
         </div>
     </div>
-</section><section style="background-color: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif; color:#aaa; font-size:12px; padding: 0; align-items: center; display: flex;"><a href="https://mobirise.site/l" style="flex: 1 1; height: 3rem; padding-left: 1rem;"></a><p style="flex: 0 0 auto; margin:0; padding-right:1rem;">This <a href="https://mobirise.site/e" style="color:#aaa;">page</a> was created with Mobirise</p></section><script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>  <script src="assets/smoothscroll/smooth-scroll.js"></script>  <script src="assets/ytplayer/index.js"></script>  <script src="assets/dropdown/js/navbar-dropdown.js"></script>  <script src="assets/theme/js/script.js"></script>  
+</section><section style="background-color: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif; color:#aaa; font-size:12px; padding: 0; align-items: center; display: flex;">
+    
+</section>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script>
+    var nome="cazzo";
+    // Codice herf durante append------------------------------------------------------------------------------------------------------
+    $("#divListaStudenti").append(
+        
+       ' <h1 id='+'"profiloUtente.html?nome='+nome+'"'+'>'+nome+'</h1>'
+                );
+    //Sistemare metodo ajax, obbligatorio con post
+    //Sistemare URL dati
+    //Sistemare invio dati
+    $.ajax({
+        url:"/getListaDiplomati",
+        method: "POST",
+        dataType: 'json',
+        data: {"nome": nome,"cognome": cognome, "materia": materia, "AS": AS},
+        success: function (data) {
+            console.log("success", data);
+            //Metodo da sistemare completamente===================================================================================
+            
+            for(var i=0; i<data.length;i++){
+                $("#divListaStudenti").append(
+                    '<div class="card">
+                        <div class="card-wrapper">
+                            <div class="row align-items-center">
+                                <div class="col-12 col-md-3">
+                                    <div class="image-wrapper">
+                                        <img src="assets/images/product3.jpg" alt="Mobirise">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md">
+                                    <div class="card-box">
+                                        <div class="row">
+                                            <div class="col-md">
+                                                <h6 class="card-title mbr-fonts-style display-5"><strong>Nome e cognome</strong></h6>
+                                                <p class="mbr-text mbr-fonts-style display-7">
+                                                    Disponibilità e materia specializzata
+                                                </p>
+                                            </div>
+                                            <div class="col-md-auto">
+                                                
+                                                <div class="mbr-section-btn"><a href="profiloUtente" class="btn btn-primary display-4">Vedi</a></div>
+                                            </div>
+                                            <div class="col-lg-2 d-none d-lg-block"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )
+            }
+            window.location.assign("../homeDashboard/HomeStudenti.html");
+        },
+        error: function (data) {
+            console.log("error", data);
+        },
+    });
+
+</script>
+<!-- <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>  <script src="assets/smoothscroll/smooth-scroll.js"></script> 
+    <script src="assets/ytplayer/index.js"></script>  <script src="assets/dropdown/js/navbar-dropdown.js"></script>  <script src="assets/theme/js/script.js"></script>   -->
   
   
   <input name="animation" type="hidden">

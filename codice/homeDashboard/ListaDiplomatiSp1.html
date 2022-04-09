@@ -64,12 +64,13 @@
     
 
     <div class="container-fluid" id="divListaStudenti">
-        <div class="card">
+        <h1>Lista Diplomati</h1>
+        <!-- <div class="card">
             <div class="card-wrapper">
                 <div class="row align-items-center">
                     <div class="col-12 col-md-3">
                         <div class="image-wrapper">
-                            <img src="assets/images/product1.jpg" alt="Mobirise">
+                            <img src="assets/images/materia.jpg" alt="Mobirise">
                         </div>
                     </div>
                     <div class="col-12 col-md">
@@ -77,12 +78,15 @@
                             <div class="row">
                                 <div class="col-md">
                                     <h6 class="card-title mbr-fonts-style display-5">
-                                        <strong>Nome e cognome</strong></h6>
+                                        <strong>Nome cognome</strong></h6>
                                     <p class="mbr-text mbr-fonts-style display-7">Disponibilità e materia specializzata</p>
+                                    <p class="mbr-text mbr-fonts-style display-7">Descrizione</p>
                                 </div>
                                 <div class="col-md-auto">
                                     
-                                    <div class="mbr-section-btn"><a href="https://mobiri.se" class="btn btn-primary display-4">Vedi</a></div>
+                                    <div class="mbr-section-btn"><a href="ProfiloD.html?nome=nome&cognome=cognome" class="btn btn-primary display-4">Visita profilo</a></div>
+                                    <div class="mbr-section-btn"><a href="PrenotaLezione.html?nome=nome&cognome=cognome" class="btn btn-primary display-4">Prenota lezione</a></div>
+                                    <div class="mbr-section-btn"><a href="ListaCommentiD.html?nome=nome&cognome=cognome" class="btn btn-primary display-4">Commenti diplomato</a></div>
                                 </div>
                                 <div class="col-lg-2 d-none d-lg-block"></div>
                             </div>
@@ -146,7 +150,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </section>
 
@@ -211,12 +215,13 @@
 </section>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script>
-    var nome="cazzo";
+    
+    
     // Codice herf durante append------------------------------------------------------------------------------------------------------
-    $("#divListaStudenti").append(
-        
-       ' <h1 id='+'"profiloUtente.html?nome='+nome+'"'+'>'+nome+'</h1>'
-                );
+    // $("#divListaStudenti").append(' <h1 id='+'"profiloUtente.html?nome='+nome+'"'+'>'+nome+'</h1>');
+    //$("#divListaStudenti").append('<div class="card"><div class="card-wrapper"><div class="row align-items-center"><div class="col-12 col-md-3"> <div class="image-wrapper"><img src='+'"assets/images/'+materiaPrim+'.html"'+' alt="Mobirise"></div></div><div class="col-12 col-md"><div class="card-box"><div class="row"><div class="col-md"><h6 class="card-title mbr-fonts-style display-5"><strong>'+nome+' '+cognome+'</strong></h6><p class="mbr-text mbr-fonts-style display-7">Materia principale: '+materiaPrim+'</p><p class="mbr-text mbr-fonts-style display-7">Altre materie: '+materieDisponibilita+'</p><p class="mbr-text mbr-fonts-style display-7">Titoli di studio: '+titoliDiStudio+'</p><p class="mbr-text mbr-fonts-style display-7">'+descrizione+'</p></div><div class="col-md-auto"><div class="mbr-section-btn"><a href='+'"ProfiloD.html?nome='+nome+'&cognome='+cognome+'"'+' class="btn btn-primary display-4">Visita profilo</a></div><div class="mbr-section-btn"><a href='+'"PrenotaLezione.html?nome='+nome+'&cognome='+cognome+'"'+' class="btn btn-primary display-4">Prenota lezione</a></div><div class="mbr-section-btn"><a href='+'"ListaCommentiD.html?nome='+nome+'&cognome='+cognome+'"'+' class="btn btn-primary display-4">Commenti diplomato</a></div></div><div class="col-lg-2 d-none d-lg-block"></div></div></div></div></div></div></div>');
+
+                
     //Sistemare metodo ajax, obbligatorio con post
     //Sistemare URL dati
     //Sistemare invio dati
@@ -224,42 +229,33 @@
         url:"/getListaDiplomati",
         method: "POST",
         dataType: 'json',
-        data: {"nome": nome,"cognome": cognome, "materia": materia, "AS": AS},
+        data: {"nome": nome,"cognome": cognome, "materia": materia, "AS": as},
         success: function (data) {
             console.log("success", data);
-            //Metodo da sistemare completamente===================================================================================
-            
             for(var i=0; i<data.length;i++){
-                $("#divListaStudenti").append(
-                    '<div class="card">
-                        <div class="card-wrapper">
-                            <div class="row align-items-center">
-                                <div class="col-12 col-md-3">
-                                    <div class="image-wrapper">
-                                        <img src="assets/images/product3.jpg" alt="Mobirise">
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md">
-                                    <div class="card-box">
-                                        <div class="row">
-                                            <div class="col-md">
-                                                <h6 class="card-title mbr-fonts-style display-5"><strong>Nome e cognome</strong></h6>
-                                                <p class="mbr-text mbr-fonts-style display-7">
-                                                    Disponibilità e materia specializzata
-                                                </p>
-                                            </div>
-                                            <div class="col-md-auto">
-                                                
-                                                <div class="mbr-section-btn"><a href="profiloUtente" class="btn btn-primary display-4">Vedi</a></div>
-                                            </div>
-                                            <div class="col-lg-2 d-none d-lg-block"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                )
+                var nome=data[i].nome;
+                var cognome=data[i].cognome;
+                var materieDisponibilita="";
+                for(var h=0; h<data[i].materieDisponibilita.length;i++){
+                    if(h=0){
+                        materieDisponibilita=materieDisponibilita+data[i].materieDisponibilita[h];
+                    }else{
+                        materieDisponibilita=materieDisponibilita+", "+data[i].materieDisponibilita[h];
+                    }
+                    
+                }
+                var materiaPrim=data[i].materiaPrincipale;
+                var descrizione=data[i].descrizione;
+                var titoliDiStudio="";  
+                for(var h=0; h<data[i].titoliDiStudio.length;i++){
+                    if(h=0){
+                        titoliDiStudio=titoliDiStudio+data[i].titoliDiStudio[h];
+                    }else{
+                        titoliDiStudio=titoliDiStudio+", "+data[i].titoliDiStudio[h];
+                    }
+                    
+                }
+                $("#divListaStudenti").append('<div class="card"><div class="card-wrapper"><div class="row align-items-center"><div class="col-12 col-md-3"> <div class="image-wrapper"><img src='+'"assets/images/'+materiaPrim+'.html"'+' alt="Mobirise"></div></div><div class="col-12 col-md"><div class="card-box"><div class="row"><div class="col-md"><h6 class="card-title mbr-fonts-style display-5"><strong>'+nome+' '+cognome+'</strong></h6><p class="mbr-text mbr-fonts-style display-7">Materia principale: '+materiaPrim+'</p><p class="mbr-text mbr-fonts-style display-7">Altre materie: '+materieDisponibilita+'</p><p class="mbr-text mbr-fonts-style display-7">Titoli di studio: '+titoliDiStudio+'</p><p class="mbr-text mbr-fonts-style display-7">'+descrizione+'</p></div><div class="col-md-auto"><div class="mbr-section-btn"><a href='+'"ProfiloD.html?nome='+nome+'&cognome='+cognome+'"'+' class="btn btn-primary display-4">Visita profilo</a></div><div class="mbr-section-btn"><a href='+'"PrenotaLezione.html?nome='+nome+'&cognome='+cognome+'"'+' class="btn btn-primary display-4">Prenota lezione</a></div><div class="mbr-section-btn"><a href='+'"ListaCommentiD.html?nome='+nome+'&cognome='+cognome+'"'+' class="btn btn-primary display-4">Commenti diplomato</a></div></div><div class="col-lg-2 d-none d-lg-block"></div></div></div></div></div></div></div>');
             }
             window.location.assign("../homeDashboard/HomeStudenti.html");
         },

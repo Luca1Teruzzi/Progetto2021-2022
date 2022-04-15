@@ -83,7 +83,7 @@
             </div>
             <div class="col-12 col-md">
                 <div class="text-wrapper" id="divBottoni">
-                    <div class="mbr-section-btn"><a href="PrenotaLezione.html?nome=nome&cognome=cognome" class="btn btn-primary display-4" id="prenotaLezione">Prenota lezione</a></div>
+                    
                     <div class="mbr-section-btn"><a class="btn btn-primary display-4" id="commentiButton">Commenti diplomato</a></div>
                 </div>
             </div>
@@ -109,6 +109,18 @@
 <section data-bs-version="5.1" class="content8 cid-t2Cdp75FG6" id="content8-2j">    
     <div class="container">
         <div class="row justify-content-center">
+            <div class="counter-container col-md-12 col-lg-10">
+                <h4 class="mbr-section-title mbr-fonts-style mb-4 display-5" id="commenti">Aggiugni Commento</h4>
+                <div class="dragArea row">
+                    <div class="col-md col-sm-12 form-group mb-3" data-for="name">
+                        <input type="text" name="name" placeholder="Name" data-form-field="name" class="form-control" value="" id="name-form5-1j">
+                    </div>
+                    <div class="col-md col-sm-12 form-group mb-3" data-for="email">
+                        <input type="text" name="email" placeholder="E-mail" data-form-field="email" class="form-control" value="" id="email-form5-1j">
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 align-center mbr-section-btn"><button type="submit" class="btn btn-primary display-4">Invia</button></div>
+                </div>
+            </div>
             <div class="counter-container col-md-12 col-lg-10">
                 <h4 class="mbr-section-title mbr-fonts-style mb-4 display-5" id="commenti">Commenti</h4>
                 <div class="mbr-text mbr-fonts-style display-7">
@@ -203,7 +215,10 @@
                 $("#divCommenti").append('<li><strong>'+nome+" "+cognome+': </strong>'+commento+'</li><a href="ProfiloS.html?"user='+user+'" class="text-primary">visualizza profilo</a>');
                 
             }
-           
+            //Dixare sistema di log in + restare loggati in account e di conseguenza fixare lo user studente------------------------------------------------------------------------------------------------------------------
+            var userStudente="";
+            $("#divBottoni").append('<div class="mbr-section-btn"><a href="PrenotaLezione.html?userDiplomato='+userDiplomato+'&userStudente='+userStudente+'" class="btn btn-primary display-4" id="prenotaLezione">Prenota lezione</a></div>')
+            
             
         },
         error: function (data) {

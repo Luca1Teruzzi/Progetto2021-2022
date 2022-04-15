@@ -62,50 +62,49 @@
     
     <div class="container">
         <div class="row align-items-center">
-            <h1>Luca Teruzzi</h1>
+            <h1 id="nomeCognome"></h1>
             <div class="col-12 col-md-6">
-                <div class="image-wrapper">
-                    <img src="assets/images/kisspng-computer-icons-google-account-user-profile-iconfin-png-icons-download-profile-5ab0301e0d78f3.2971990915214960940552-900x520.jpg" alt="Mobirise">
+                <div class="image-wrapper" id="divImmagineMateria">
+                    
                 </div>
             </div>
-            <div class="col-12 col-md">
+            <div class="col-12 col-md" id="divInformazioni">
 
                <h4 >  <strong>Informazioni</strong></h4>
         
-                <p class="name mbr-fonts-style mb-1 display-4">Età:</p>
-                <p class="name mbr-fonts-style mb-1 display-4">Genere:</p>
-                <p class="name mbr-fonts-style mb-1 display-4">Titolo di studio:</p>
-                <p class="name mbr-fonts-style mb-1 display-4">Materia specializzata:</p>
+                <p class="name mbr-fonts-style mb-1 display-4" id="eta">Età:</p>
+                <p class="name mbr-fonts-style mb-1 display-4" id="genere">Genere:</p>
+                <p class="name mbr-fonts-style mb-1 display-4" id="titoloDiStudio">Titolo di studio:</p>
+                <p class="name mbr-fonts-style mb-1 display-4" id="materiaPrim">Materia specializzata:</p>
                 
                 
 
                 
             </div>
             <div class="col-12 col-md">
-                <div class="text-wrapper">
+                <div class="text-wrapper" id="divBottoni">
                     <div class="mbr-section-btn"><a href="PrenotaLezione.html?nome=nome&cognome=cognome" class="btn btn-primary display-4" id="prenotaLezione">Prenota lezione</a></div>
-                    <div class="mbr-section-btn"><a href="" class="btn btn-primary display-4" id="commentiButton">Commenti diplomato</a></div>
+                    <div class="mbr-section-btn"><a class="btn btn-primary display-4" id="commentiButton">Commenti diplomato</a></div>
                 </div>
             </div>
         </div>
         
         <div class="row align-items-center">
-            <div class="col-12 col-md">
+            <div class="col-12 col-md" id="divDescrizone">
                 <div class="text-wrapper">
                     <p class="mbr-text mbr-fonts-style mb-4 display-7"> Descrizione</p>
-                    <p class="name mbr-fonts-style mb-1 display-4">Insegno come mandare a fare in culo la gente</p>
-                    <p class="position mbr-fonts-style display-4">Non provare a commentare se no ti esplode la casa la macchina la famiglia la sorella il padre la madre e il ponte</p>
+                    
+                    
                 </div>
-                <div class="text-wrapper">
+                <div class="text-wrapper" id="divMaterie">
                     <h3>Materie</h3>
-                    <a class="btn btn-primary display-4">Matematica</a>
-                    <a class="btn btn-primary display-4">Motoria</a>
+                    
                 </div>
             </div>
         </div>
     </div>
-    
 </section>
+
 
 <section data-bs-version="5.1" class="content8 cid-t2Cdp75FG6" id="content8-2j">    
     <div class="container">
@@ -113,10 +112,8 @@
             <div class="counter-container col-md-12 col-lg-10">
                 <h4 class="mbr-section-title mbr-fonts-style mb-4 display-5" id="commenti">Commenti</h4>
                 <div class="mbr-text mbr-fonts-style display-7">
-                    <ul>
-                        <li><strong>Nome e cognome dello studente: </strong>commento. <a href="" class="text-primary">link al profilo dello studente</a> </li>
-                        <li><strong>Nome e cognome dello studente: </strong>commento. <a href="" class="text-primary">link al profilo dello studente</a> </li>
-                        <li><strong>Nome e cognome dello studente: </strong>commento. <a href="" class="text-primary">link al profilo dello studente</a> </li>
+                    <ul id="divCommenti">
+                        
                     </ul>
                 </div>
             </div>
@@ -168,12 +165,52 @@
 </section>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script>
-    $("#commentiButton").click(function() {
-        $(window).scroll(function() {
-        $('html, body').animate({
-            scrollTop: $("#commenti").offset().top
-        }, 2000);
-    });
+    var urlParams = new URLSearchParams(window.location.search);
+    var has_msg = urlParams.has('user'); 
+    var userDiplomato = urlParams.get('user'); 
+    
+    
+    $.ajax({
+        url:"/getInfoProfilo",
+        method: "POST",
+        dataType: 'json',
+        data: {"user":userDiplomato},
+        success: function (data) {
+            var nome=data.nome;
+            var cognome=data.cognome;
+            $("#divMaterie").append(nome+" "+cognome);
+            console.log("success", data);
+            for(var h=0; h<data.materieDisponibilita.length;i++){
+                $("#divMaterie").append("<a class='btn btn-primary display-4'>"+data.materieDisponibilita[h]+"</a>");
+            }
+            var materiaPrim=data.materiaPrim;
+            var eta=data.eta;
+            var genere=data.genere;
+            var titoloDiStudio=data.titoloDiStudio;
+            var descrizione=data.descrizione;
+            $("#divImmagineMateria").append('<img src="assets/images/'+materiaPrim+'.jpg" alt="Mobirise">');
+            $("#eta").append(eta);
+            $("#genere").append(genere);
+            $("#titoloDiStudio").append(titoloDiStudio);
+            $("#materiaPrim").append(materiaPrim);
+            $("#divDescrizione").append('<p class="name mbr-fonts-style mb-1 display-4" >'+descrizione+'</p>');
+            
+            for(var i=0; i<data.commenti.length;i++){
+                var comento=data.commenti[i].commento;
+                var nome=data.commenti[i].nome;
+                var cognome=data.commenti[i].cognome;
+                var user=data.commenti[i].user;
+                $("#divCommenti").append('<li><strong>'+nome+" "+cognome+': </strong>'+commento+'</li><a href="ProfiloS.html?"user='+user+'" class="text-primary">visualizza profilo</a>');
+                
+            }
+           
+            
+        },
+        error: function (data) {
+            console.log("error", data);
+        },
+    
+    
 });
    
 </script>

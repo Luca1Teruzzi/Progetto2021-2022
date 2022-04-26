@@ -262,9 +262,17 @@
             $("#divMaterie").append(nomeDip+" "+cognomeDip);
             console.log("success", data);
             //Fixare materie e tastini materie+finire modifica profilo--------------------------------------------------------------------------------------
-            for(var h=0; h<materieTotali.length;i++){
-
-                $("#divMaterie").append("<a class='btn btn-primary display-4'>"+data.materieDisponibilita[h]+"</a>");
+            for(var i=0; i<materieTotali.length;i++){
+                var b=true;
+                for(var h=0; h<materieDisponibilita.length;h++){
+                    if(materieTotali[i].codice==materieDisponibilita[h].codice_materia){
+                        b=false;
+                        $("#divMaterie").append('<input type="checkbox" class="btn-check" id="btn-check-outlined" checked autocomplete="off"><label class="btn btn-outline-primary" for="btn-check-outlined">'+materieDisponibilita[h].nome+' '+materieDisponibilita[h].anno+'</label>');
+                    }
+                    if(b){
+                        $("#divMaterie").append('<input type="checkbox" class="btn-check" id="btn-check-outlined" autocomplete="off"><label class="btn btn-outline-primary" for="btn-check-outlined">'+materieDisponibilita[h].nome+' '+materieDisponibilita[h].anno+'</label>');
+                    }
+                }
             }
             var materiaPrim=data.materiaPrim;
             var eta=data.eta;

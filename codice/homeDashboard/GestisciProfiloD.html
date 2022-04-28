@@ -73,34 +73,28 @@
                <h4 >  <strong>Informazioni</strong></h4>
         
                 <p class="name mbr-fonts-style mb-1 display-4" id="eta">Età:
-                    <div class="col-lg-12 col-md-12 col-sm-12 form-group mb-3" data-for="eta">
-                        <input type="text" name="Età" placeholder="Eta" data-form-field="eta" class="form-control" value="" id="eta-form7-1f">
-                    </div>
+                    
                 </p>
                 <p class="name mbr-fonts-style mb-1 display-4" id="genere">Genere:
                     <div class="dragArea row" id="dragAreaRow1">
                         <div data-for="gender" class="col-lg-12 col-md-12 col-sm-12 form-group mb-3">
                             <select name="gender" id="gender-form7-1f" data-form-field="gender" class="form-control" value="">
-                                <option value="" disabled selected hidden >Scegli il genere</option>
-                                <option value="Maschio" >Maschio</option>
-                                <option value="Femmina">Femmina</option>
-                                <option value="Altro">Altro</option>  
-
+                                
+                                
+                                 
                             </select>
                         </div>
                     </div> 
 
                 </p>
                 <p class="name mbr-fonts-style mb-1 display-4" id="titoloDiStudio">Titolo di studio:
-                    <div class="col-lg-12 col-md-12 col-sm-12 form-group mb-3" data-for="titoloDiStudio">
-                        <input type="text" name="titoloDiStudio" placeholder="Titolo Di Studio" data-form-field="titoloDiStudio" class="form-control" value="" id="titoloDiStudio-form7-1f">
-                    </div>
+                    
                 </p>
                 <p class="name mbr-fonts-style mb-1 display-4" id="materiaPrim">Materia specializzata:
                     <div class="dragArea row" id="dragAreaRow1">
                         <div data-for="gender" class="col-lg-12 col-md-12 col-sm-12 form-group mb-3">
-                            <select name="gender" id="gender-form7-1f" data-form-field="gender" class="form-control" value="">
-                                <option value="" disabled selected hidden >Scegli il genere</option>
+                            <select name="gender" id="materiaPrim-form7-1f" data-form-field="gender" class="form-control" value="">
+                                <option value="" disabled selected hidden >Scegli la materia specializzata</option>
                                 <option value="Maschio" >Maschio</option>
                                 <option value="Femmina">Femmina</option>
                                 <option value="Altro">Altro</option>  
@@ -285,16 +279,48 @@
                     }
                 }
             }
+            
             var materiaPrim=data.materiaPrim;
             var eta=data.eta;
             var genere=data.genere;
             var titoloDiStudio=data.titoloDiStudio;
             var descrizione=data.descrizione;
             $("#divImmagineMateria").append('<img src="assets/images/'+materiaPrim+'.jpg" alt="Mobirise">');
-            $("#eta").append(eta);
-            $("#genere").append(genere);
-            $("#titoloDiStudio").append(titoloDiStudio);
-            $("#materiaPrim").append(materiaPrim);
+            $("#eta").append('<div class="col-lg-12 col-md-12 col-sm-12 form-group mb-3" data-for="eta"><input type="text" name="Età" placeholder="'+eta+'" data-form-field="eta" class="form-control" value="" id="eta-form7-1f"></div>');
+            if(genere="maschio"){
+                $("#gender-form7-1f").append('<option value="Maschio" >Maschio</option><option value="Femmina">Femmina</option><option value="Altro">Altro</option>'); 
+            }else if(genere="femmina"){
+                $("#gender-form7-1f").append('<option value="Femmina">Femmina</option><option value="Maschio" >Maschio</option><option value="Altro">Altro</option>'); 
+            }else{
+                $("#gender-form7-1f").append('<option value="Altro">Altro</option><option value="Maschio" >Maschio</option><option value="Femmina">Femmina</option>'); 
+            }
+
+            $("#titoloDiStudio").append('<div class="col-lg-12 col-md-12 col-sm-12 form-group mb-3" data-for="titoloDiStudio"><input type="text" name="titoloDiStudio" placeholder="'+titoloDiStudio+'" data-form-field="titoloDiStudio" class="form-control" value="" id="titoloDiStudio-form7-1f"></div>');
+            
+            var controllo=true;
+            var materieSingole=[];
+            materieSingole.push[materieTotali[i]];
+            for(var i=0; i<materieTotali.length;i++){
+                for(var h=0;h<materieSingole.length;h++){
+
+                }
+            }
+            if(materiaPrim==""||materiaPrim==null){
+                $("#materiaPrim-form7-1f").append('<option value="" disabled selected hidden >Scegli la materia specializzata</option>');
+            }else{
+                $("#materiaPrim-form7-1f").append('<option value="'+materiaPrim+'" >'+materiaPrim+'</option>');
+                controllo=false;
+            }
+            for(var i=0; i<materieTotali.length;i++){
+                if(controllo){
+                    if(materieTotali[i]){}
+
+                    $("#materiaPrim-form7-1f").append('<option value="'+ materieTotali[i].nome+'" >'+ materieTotali[i].nome+'</option>');
+                }else{
+                    if(materieTotali[i].nome!=materiaPrim);
+                }
+            }
+            $("#materiaPrim-form7-1f").append(materiaPrim);
             $("#divDescrizione").append('<p class="name mbr-fonts-style mb-1 display-4" >'+descrizione+'</p>');
             
             

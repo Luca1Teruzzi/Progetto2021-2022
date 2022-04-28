@@ -94,11 +94,7 @@
                     <div class="dragArea row" id="dragAreaRow1">
                         <div data-for="gender" class="col-lg-12 col-md-12 col-sm-12 form-group mb-3">
                             <select name="gender" id="materiaPrim-form7-1f" data-form-field="gender" class="form-control" value="">
-                                <option value="" disabled selected hidden >Scegli la materia specializzata</option>
-                                <option value="Maschio" >Maschio</option>
-                                <option value="Femmina">Femmina</option>
-                                <option value="Altro">Altro</option>  
-
+                                
                             </select>
                         </div>
                     </div>
@@ -111,7 +107,8 @@
             <div class="col-12 col-md">
                 <div class="text-wrapper" id="divBottoni">
                     
-                    <div class="mbr-section-btn"><a class="btn btn-primary display-4" id="commentiButton">Commenti diplomato</a></div>
+                    
+                    <div class="mbr-section-btn"><a class="btn btn-primary display-4" id="salva">Salva Modifiche</a></div>
                 </div>
             </div>
         </div>
@@ -236,16 +233,13 @@
 </section>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script>
-    var urlParams = new URLSearchParams(window.location.search);
-    var has_msg = urlParams.has('user'); 
-    var userDiplomato = urlParams.get('user'); 
     
     
     $.ajax({
         url:"/getInfoProfilo",
         method: "POST",
         dataType: 'json',
-        data: {"user":userDiplomato},
+        data: {},
         success: function (data) {
             var usernameUtente=data.user;
             var tipoUtente=data.tipoUtente;
@@ -253,7 +247,7 @@
             var cognomeDip=data.cognome;
             var materieTotali=data.materieTotali;
             var materieDisponibilita=data.materieDisponibilita;
-            $("#divMaterie").append(nomeDip+" "+cognomeDip);
+            $("#nomeCognome").append(nomeDip+" "+cognomeDip);
             console.log("success", data);
             //Fixare tasto salva + textareaS
             for(var i=0; i<materieTotali.length;i++){
@@ -299,62 +293,45 @@
             
             var controllo=true;
             var materieSingole=[];
-            materieSingole.push[materieTotali[i]];
             for(var i=0; i<materieTotali.length;i++){
+                var check=true;
                 for(var h=0;h<materieSingole.length;h++){
-
+                
+                    if(materieSingole[h].nome==materieTotali[i].nome){
+                        check=false
+                    }
+                }
+                if(check){
+                    materieSingole.push(materieTotali[i]);
                 }
             }
-            if(materiaPrim==""||materiaPrim==null){
+            if(materiaPrim.nome==""||materiaPrim.nome==null){
                 $("#materiaPrim-form7-1f").append('<option value="" disabled selected hidden >Scegli la materia specializzata</option>');
             }else{
-                $("#materiaPrim-form7-1f").append('<option value="'+materiaPrim+'" >'+materiaPrim+'</option>');
+                $("#materiaPrim-form7-1f").append('<option value="'+materiaPrim.nome+'" >'+materiaPrim.nome+'</option>');
                 controllo=false;
             }
-            for(var i=0; i<materieTotali.length;i++){
+            for(var i=0; i<materieSingole.length;i++){
                 if(controllo){
-                    if(materieTotali[i]){}
-
-                    $("#materiaPrim-form7-1f").append('<option value="'+ materieTotali[i].nome+'" >'+ materieTotali[i].nome+'</option>');
+                    $("#materiaPrim-form7-1f").append('<option value="'+ materieSingole[i].nome+'" >'+ materieSingole[i].nome+'</option>');
                 }else{
-                    if(materieTotali[i].nome!=materiaPrim);
+                    if(materieSingole[i].nome!=materiaPrim.nome){
+                        $("#materiaPrim-form7-1f").append('<option value="'+ materieSingole[i].nome+'" >'+ materieSingole[i].nome+'</option>');
+                    }
                 }
             }
-            $("#materiaPrim-form7-1f").append(materiaPrim);
+            
             $("#divDescrizione").append('<p class="name mbr-fonts-style mb-1 display-4" >'+descrizione+'</p>');
+            $("#divBottoni").append('<div class="mbr-section-btn"><a class="btn btn-primary display-4" id="commentiButton">Commenti</a></div>');
+            $("#divCommentiTit").append('<h4 class="mbr-section-title mbr-fonts-style mb-4 display-5" id="commenti">Commenti</h4>');
+            for(var i=0; i<data.commenti.length;i++){
+                var comento=data.commenti[i].commento;
+                var nome=data.commenti[i].nome;
+                var cognome=data.commenti[i].cognome;
+                var user=data.commenti[i].user;
+                $("#divCommenti").append('<li><strong>'+nome+" "+cognome+': </strong>'+commento+'</li><a href="ProfiloStudente.html?"user='+user+'" class="text-primary">visualizza profilo</a>');    
+            }   
             
-            
-            if(tipoUtente=="Studente"){
-                $("#divAddComment").append('<div class="counter-container col-md-12 col-lg-10"><h4 class="mbr-section-title mbr-fonts-style mb-4 display-5" id="commenti">Aggiugni Commento</h4><div class="dragArea row"> <div class="col-md col-sm-12 form-group mb-3" data-for="commenmto"><input type="text" name="commenmto" placeholder="Commenmto" data-form-field="commenmto" class="form-control" value="" id="commenmto-form5-1j"></div><div class="col-lg-12 col-md-12 col-sm-12 align-center mbr-section-btn"><button type="submit" class="btn btn-primary display-4" id="bottoneInviaCommento">Invia</button></div></div></div>');
-
-                $('#bottoneInviaCommento').click(function () {
-                    var commento=$('#commenmto-form5-1j').val();
-                    $.ajax({
-                        url:"/addComment",
-                        method: "POST",
-                        dataType: 'json',
-                        data: {"commento":commento,"user":usernameUtente},
-                        success: function (data) {
-                            var nome=data.nome;
-                            var cognome=data.cognome;
-                            $("#divCommenti").append('<li><strong>'+nome+" "+cognome+': </strong>'+commento+'</li><a href="ProfiloStudente.html?"user='+usernameUtente+'" class="text-primary">visualizza profilo</a>');
-                        },
-                        error: function (data) {
-                            console.log("error", data);
-                        },
-                    });
-                });
-                $("#divBottoni").append('<div class="mbr-section-btn"><a href="PrenotaLezione.html?userDiplomato='+userDiplomato+' class="btn btn-primary display-4" id="prenotaLezione">Prenota lezione</a></div>');
-            }else{
-                $("#divCommentiTit").append('<h4 class="mbr-section-title mbr-fonts-style mb-4 display-5" id="commenti">Commenti</h4>');
-                for(var i=0; i<data.commenti.length;i++){
-                    var comento=data.commenti[i].commento;
-                    var nome=data.commenti[i].nome;
-                    var cognome=data.commenti[i].cognome;
-                    var user=data.commenti[i].user;
-                    $("#divCommenti").append('<li><strong>'+nome+" "+cognome+': </strong>'+commento+'</li><a href="ProfiloStudente.html?"user='+user+'" class="text-primary">visualizza profilo</a>');    
-                }   
-            }
         },
         error: function (data) {
             console.log("error", data);
@@ -362,6 +339,9 @@
     
     
 });
+$("#salva").click(function() {
+    //Fxare tasto salva==============================================================================================================
+});;
    
 </script>
 <!-- <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>  <script src="assets/smoothscroll/smooth-scroll.js"></script>  

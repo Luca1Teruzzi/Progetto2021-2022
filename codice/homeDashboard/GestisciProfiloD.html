@@ -119,14 +119,12 @@
             <div class="col-12 col-md" id="divDescrizone">
                 <div class="text-wrapper">
                     <p class="mbr-text mbr-fonts-style mb-4 display-7"> Descrizione
-                        <div class="col-lg-12 col-md-12 col-sm-12 form-group mb-3" data-for="descrizione">
-                            <input type="text" name="Descrizione" placeholder="Descrizione" data-form-field="descrizione" class="form-control" value="" id="descrizioneSSSS-form7-1f">
-                        </div>
+                        
                     </p>
                 </div>
                 <div class="text-wrapper" id="divMaterie">
                     <h3>Materie</h3>
-                    <!-- <input type="checkbox" class="btn-check" id="btn-check-outlined" checked autocomplete="off">
+                     <!-- <input type="checkbox" class="btn-check" id="btn-check-outlined" checked autocomplete="off">
                     <label class="btn btn-outline-primary" for="btn-check-outlined">Matematica 1</label>
                     <input type="checkbox" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off">
                     <label class="btn btn-outline-primary" for="btn-check-2-outlined">Matematica 2</label>
@@ -157,8 +155,8 @@
                     <input type="checkbox" class="btn-check" id="btn-check-14-outlined" checked autocomplete="off">
                     <label class="btn btn-outline-primary" for="btn-check-14-outlined">Religione 4</label>
                     <input type="checkbox" class="btn-check" id="btn-check-15-outlined" checked autocomplete="off">
-                    <label class="btn btn-outline-primary" for="btn-check-15-outlined">Religione 5</label><br>
-     -->
+                    <label class="btn btn-outline-primary" for="btn-check-15-outlined">Religione 5</label><br> -->
+     
                 </div>
             </div>
         </div>
@@ -249,7 +247,7 @@
             var materieDisponibilita=data.materieDisponibilita;
             $("#nomeCognome").append(nomeDip+" "+cognomeDip);
             console.log("success", data);
-            //Fixare tasto salva + textareaS
+            //Fixare tasti segnala commenti + fixare salvataggio materie modificate------------------------------------------------------------------
             for(var i=0; i<materieTotali.length;i++){
                 var b=true;
                 for(var h=0; h<materieDisponibilita.length;h++){
@@ -321,8 +319,8 @@
                 }
             }
             
-            $("#divDescrizione").append('<p class="name mbr-fonts-style mb-1 display-4" >'+descrizione+'</p>');
-            $("#divBottoni").append('<div class="mbr-section-btn"><a class="btn btn-primary display-4" id="commentiButton">Commenti</a></div>');
+            $("#divDescrizione").append('<div class="col-lg-12 col-md-12 col-sm-12 form-group mb-3" data-for="descrizione"><input type="text" name="Descrizione" placeholder="'+descrizione+'" data-form-field="descrizione" class="form-control" value="" id="descrizione-form7-1f"></div>');
+            $("#divBottoni").append('<div class="mbr-section-btn"><a href="#commenti" class="btn btn-primary display-4" id="commentiButton">Commenti</a></div>');
             $("#divCommentiTit").append('<h4 class="mbr-section-title mbr-fonts-style mb-4 display-5" id="commenti">Commenti</h4>');
             for(var i=0; i<data.commenti.length;i++){
                 var comento=data.commenti[i].commento;
@@ -337,11 +335,29 @@
             console.log("error", data);
         },
     
-    
-});
-$("#salva").click(function() {
-    //Fxare tasto salva==============================================================================================================
-});;
+    });
+        
+    $("#salva").click(function() {
+        var etaM=$('#eta-form7-1f').val();
+        var genereM=$('#genere-form7-1f').val();
+        var titoloDiStudioM=$('#titoloDiStudio-form7-1f').val();
+        var materiaPrimM=$('#materiaPrim-form7-1f').val();
+        var descrizioneM=$('#descrizione-form7-1f').val();
+        
+        $.ajax({
+            url:"/getInfoProfilo",
+            method: "POST",
+            dataType: 'json',
+            data: {"eta": etaM,"genere": genereM, "titoloDiStudio": titoloDiStudioM, "materiaPrim": materiaPrimM, "descrizione": descrizioneM},
+            success: function (data) {
+                alert("Salvataggio avvenuto con successo");
+            },
+            error: function (data) {
+                alert("Qualcosa è andato storto durante il salvataggio, riprova piu tardi");
+                console.log("error", data);
+            },
+        });
+    });
    
 </script>
 <!-- <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>  <script src="assets/smoothscroll/smooth-scroll.js"></script>  

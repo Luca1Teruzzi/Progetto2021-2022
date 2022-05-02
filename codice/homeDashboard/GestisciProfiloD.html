@@ -179,7 +179,7 @@
                   
                 <div class="mbr-text mbr-fonts-style display-7">
                     <ul id="divCommenti">
-                        
+                        <li><strong>nome cognome: </strong>commento <a href="ProfiloStudente.html?"user='user' class="text-primary">visualizza profilo </a><a class="btn btn-primary display-4" id="salva">Salva Modifiche</a></li>
                     </ul>
                 </div>
             </div>
@@ -323,11 +323,27 @@
             $("#divBottoni").append('<div class="mbr-section-btn"><a href="#commenti" class="btn btn-primary display-4" id="commentiButton">Commenti</a></div>');
             $("#divCommentiTit").append('<h4 class="mbr-section-title mbr-fonts-style mb-4 display-5" id="commenti">Commenti</h4>');
             for(var i=0; i<data.commenti.length;i++){
+                var voto=data.commenti[i].voto;
                 var comento=data.commenti[i].commento;
                 var nome=data.commenti[i].nome;
                 var cognome=data.commenti[i].cognome;
                 var user=data.commenti[i].user;
-                $("#divCommenti").append('<li><strong>'+nome+" "+cognome+': </strong>'+commento+'</li><a href="ProfiloStudente.html?"user='+user+'" class="text-primary">visualizza profilo</a>');    
+                $("#divCommenti").append('<li><strong>'+nome+" "+cognome+': </strong>'+voto+' '+commento+'<a href="ProfiloStudente.html?"user='+user+'" class="text-primary">visualizza profilo</a><a class="btn btn-primary display-4" id="segnala'+i+'">Segnala</a></li>');
+                $('"#segnala'+i+'"').click(function() {
+                    $.ajax({
+                        url:"/segnala",
+                        method: "POST",
+                        dataType: 'json',
+                        data: {"": etaM},
+                        success: function (data) {
+                            alert("Salvataggio avvenuto con successo");
+                        },
+                        error: function (data) {
+                            alert("Qualcosa è andato storto durante il salvataggio, riprova piu tardi");
+                            console.log("error", data);
+                        },
+                    });
+                });
             }   
             
         },

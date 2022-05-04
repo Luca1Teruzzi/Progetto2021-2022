@@ -248,6 +248,7 @@
             $("#nomeCognome").append(nomeDip+" "+cognomeDip);
             console.log("success", data);
             //Fixare tasti segnala commenti + fixare salvataggio materie modificate + aggiunta materie------------------------------------------------------------------
+            //Bottoni Materie
             for(var i=0; i<materieTotali.length;i++){
                 var b=true;
                 for(var h=0; h<materieDisponibilita.length;h++){
@@ -277,8 +278,14 @@
             var genere=data.genere;
             var titoloDiStudio=data.titoloDiStudio;
             var descrizione=data.descrizione;
+
+            //Immagine
             $("#divImmagineMateria").append('<img src="assets/images/'+materiaPrim+'.jpg" alt="Mobirise">');
+
+            //Eta
             $("#eta").append('<div class="col-lg-12 col-md-12 col-sm-12 form-group mb-3" data-for="eta"><input type="text" name="Età" placeholder="'+eta+'" data-form-field="eta" class="form-control" value="" id="eta-form7-1f"></div>');
+            
+            //Genere
             if(genere="maschio"){
                 $("#gender-form7-1f").append('<option value="Maschio" >Maschio</option><option value="Femmina">Femmina</option><option value="Altro">Altro</option>'); 
             }else if(genere="femmina"){
@@ -287,8 +294,10 @@
                 $("#gender-form7-1f").append('<option value="Altro">Altro</option><option value="Maschio" >Maschio</option><option value="Femmina">Femmina</option>'); 
             }
 
+            //Titolo Di Studio
             $("#titoloDiStudio").append('<div class="col-lg-12 col-md-12 col-sm-12 form-group mb-3" data-for="titoloDiStudio"><input type="text" name="titoloDiStudio" placeholder="'+titoloDiStudio+'" data-form-field="titoloDiStudio" class="form-control" value="" id="titoloDiStudio-form7-1f"></div>');
             
+            //Materia Principale
             var controllo=true;
             var materieSingole=[];
             for(var i=0; i<materieTotali.length;i++){
@@ -318,23 +327,14 @@
                     }
                 }
             }
-            
-            //Aggiungere materie da inserire e commentare tutto
-            // for(var i=0; i<materieTotali.length;i++){
-            //     var check=true;
-            //     for(var h=0;h<materieSingole.length;h++){
-                
-            //         if(materieSingole[h].nome==materieTotali[i].nome){
-            //             check=false
-            //         }
-            //     }
-            //     if(check){
-            //         materieSingole.push(materieTotali[i]);
-            //     }
-            // }
 
+            //Descrizione
             $("#divDescrizione").append('<div class="col-lg-12 col-md-12 col-sm-12 form-group mb-3" data-for="descrizione"><input type="text" name="Descrizione" placeholder="'+descrizione+'" data-form-field="descrizione" class="form-control" value="" id="descrizione-form7-1f"></div>');
+            
+            //Bottoni
             $("#divBottoni").append('<div class="mbr-section-btn"><a href="#commenti" class="btn btn-primary display-4" id="commentiButton">Commenti</a></div>');
+            
+            //Commenti
             $("#divCommentiTit").append('<h4 class="mbr-section-title mbr-fonts-style mb-4 display-5" id="commenti">Commenti</h4>');
             for(var i=0; i<data.commenti.length;i++){
                 var voto=data.commenti[i].voto;
@@ -366,7 +366,8 @@
         },
     
     });
-        
+    
+    //Bottone Salvataggio
     $("#salva").click(function() {
         var etaM=$('#eta-form7-1f').val();
         var genereM=$('#genere-form7-1f').val();
@@ -375,20 +376,20 @@
         var descrizioneM=$('#descrizione-form7-1f').val();
         var controllo=true;
         var materieAttive=[];
-        for(var i=0; i<materieTotali.length;i++){
-            if(materieSingole[h].nome==materieTotali[i].nome){
-                check=false;
-            }
-        }
-        if(check){
-            materieSingole.push(materieTotali[i]);
-        }
-        
-        if ($('#btn-check-outlined').is(":checked")){
-            console.log("cazzo1");
-        }else{
-            console.log("no-cazzo1");
-        }
+        //Leggo Valori chekbox
+        // for(var i=0; i<materieTotali.length;i++){
+        //     if(materieSingole[h].nome==materieTotali[i].nome){
+        //         check=false;
+        //     }
+        // }
+        // if(check){
+        //     materieSingole.push(materieTotali[i]);
+        // }
+        // if ($('#btn-check-outlined').is(":checked")){
+        //     console.log("cazzo1");
+        // }else{
+        //     console.log("no-cazzo1");
+        // }
         $.ajax({
             url:"/salva",
             method: "POST",

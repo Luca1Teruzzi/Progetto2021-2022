@@ -1,14 +1,25 @@
 <body>
     <input type="checkbox" class="btn-check" id="btn-check-outlined" checked autocomplete="off">
     <label class="btn btn-outline-primary" for="btn-check-outlined">Matematica 1</label>
-    <input type="checkbox" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off">
+    <input type="checkbox" class="btn-check" id="btn-check-2-outlined" >
     <label class="btn btn-outline-primary" for="btn-check-2-outlined">Matematica 2</label>
-    <button id="cazzo"></button>
+    <button id="cazzo">Ciao</button>
     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script>
+    $("#cazzo").click(function() {
+        console.log("ciao");
+        var ciao=$("#btn-check-outlined").val();
+        if ($('#btn-check-outlined').is(":checked")){
+            console.log("cazzo1");
+        }else{
+            console.log("no-cazzo1");
+        }
+        
+        var ciao2=$("#btn-check-2-outlined").val();
+        console.log(ciao2);
+    });
     
-    var ciao=$("#btn-check-outlined").val();
-    echo(ciao);
+    
 </script>
 </body>

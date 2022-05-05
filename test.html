@@ -1,25 +1,63 @@
-<body>
-    <input type="checkbox" class="btn-check" id="btn-check-outlined" checked autocomplete="off">
-    <label class="btn btn-outline-primary" for="btn-check-outlined">Matematica 1</label>
-    <input type="checkbox" class="btn-check" id="btn-check-2-outlined" >
-    <label class="btn btn-outline-primary" for="btn-check-2-outlined">Matematica 2</label>
-    <button id="cazzo">Ciao</button>
-    
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script>
-    $("#cazzo").click(function() {
-        console.log("ciao");
-        var ciao=$("#btn-check-outlined").val();
-        if ($('#btn-check-outlined').is(":checked")){
-            console.log("cazzo1");
-        }else{
-            console.log("no-cazzo1");
+
+
+
+<!DOCTYPE html>
+<html>
+  
+<head>
+    <title>
+        How to use Checkbox inside Select 
+        Option using JavaScript?
+    </title>
+  
+    <style>
+        
+  
+        
+  
+        
+        .multiselect-container>li>a>label {
+            padding: 4px 20px 3px 20px;
         }
         
-        var ciao2=$("#btn-check-2-outlined").val();
-        console.log(ciao2);
-    });
+    </style>
+</head>
+  
+<link href="https://unpkg.com/bootstrap@3.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://unpkg.com/bootstrap@3.3.2/dist/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/bootstrap-multiselect@0.9.13/dist/js/bootstrap-multiselect.js"></script>
+<link href="https://unpkg.com/bootstrap-multiselect@0.9.13/dist/css/bootstrap-multiselect.css" rel="stylesheet"/>
+
+<form id="form1">
+  <div style="padding:20px">
+
+    <select id="lunedi" multiple="multiple">
+      <option value="cheese">Cheese</option>
+      <option value="tomatoes">Tomatoes</option>
+      <option value="mozarella">Mozzarella</option>
+      <option value="mushrooms">Mushrooms</option>
+      <option value="pepperoni">Pepperoni</option>
+      <option value="onions">Onions</option>
+    </select>
     
-    
-</script>
+    <br /><br />
+
+    <input type="button" id="invio" value="Get Selected Values" />
+  </div>
+</form>
+  
+    <script>
+        $(function() {
+
+            $('#lunedi').multiselect({
+                includeSelectAllOption: true
+            });
+            $('#invio').click(function() {
+                alert($('#lunedi').val());
+            });
+        });
+    </script>
 </body>
+  
+</html>

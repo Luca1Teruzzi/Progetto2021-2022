@@ -25,6 +25,7 @@
   
   
   
+  
 </head>
 <body>
     
@@ -138,36 +139,56 @@
                     <label class="btn btn-outline-primary" for="btn-check-15-outlined">Religione 5</label><br> -->
      
                 </div>
+                
+                
+                
+                
                 <div class="text-wrapper" id="divMaterie">
                     <h3>Disponibilita</h3>
-                    <p class="name mbr-fonts-style mb-1 display-4" id="materiaPrim">Lunedi:
-                        <div class="dragArea row" id="dragAreaRow1">
-                            <div data-for="gender" class="col-lg-12 col-md-12 col-sm-12 form-group mb-3">
-                                <select name="gender" id="materiaPrim-form7-1f" data-form-field="gender" class="form-control" value="">
-                                    
-                                </select>
-                            </div>
-                        </div>
-                    </p>
+                    <!-- Aggiunta per checkBox ==================================================================================== -->
+                    <style>
+                        .multiselect-container>li>a>label {
+                            padding: 4px 20px 3px 20px;
+                        }  
+                    </style>
+                    <link rel="stylesheet" href="https://unpkg.com/bootstrap@3.3.2/dist/css/bootstrap.min.css" />
+                    <script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script>
+                    <script src="https://unpkg.com/bootstrap@3.3.2/dist/js/bootstrap.min.js"></script>
+                    <script src="https://unpkg.com/bootstrap-multiselect@0.9.13/dist/js/bootstrap-multiselect.js"></script>
+                    <link rel="stylesheet" href="https://unpkg.com/bootstrap-multiselect@0.9.13/dist/css/bootstrap-multiselect.css" />
+                    
+                    <form id="form1">
+                    <div style="padding:20px">
 
-                    <!-- <form>
-                        <div class="multiselect">
-                          <div class="selectBox" onclick="showCheckboxes()">
-                            <select>
-                              <option>Select an option</option>
-                            </select>
-                            <div class="overSelect"></div>
-                          </div>
-                          <div id="checkboxes">
-                            <label for="one">
-                              <input type="checkbox" id="one" />First checkbox</label>
-                            <label for="two">
-                              <input type="checkbox" id="two" />Second checkbox</label>
-                            <label for="three">
-                              <input type="checkbox" id="three" />Third checkbox</label>
-                          </div>
-                        </div>
-                      </form> -->
+                        <select id="lunedi" multiple="multiple">
+                          <option value="1">8:00/9:00</option>
+                          <option value="2">10:00/11:00</option>
+                          <option value="3">11:00/12:00</option>
+                          <option value="4">12:00/13:00</option>
+                          <option value="5">13:00/14:00</option>
+                          <option value="6">15:00/16:00</option>
+                          <option value="7">16:00/17:00</option>
+                          <option value="8">17:00/18:00</option>
+                          <option value="9">18:00/19:00</option>
+                        </select>
+                        
+                        <br /><br />
+                    
+                        <input type="button" id="btnget" value="Get Selected Values" />
+                      </div>
+                    </form>
+                    <script>
+                        $('#lunedi').multiselect({
+                                includeSelectAllOption: true
+                            });
+                        $(function() {
+                            
+                            $('#invia').click(function() {
+                                alert($('#lunedi').val());
+                            });
+                        });
+                    </script>
+                   <!--  ============================================================================================================ -->   
                       
                     <p class="name mbr-fonts-style mb-1 display-4" id="materiaPrim">Martedi:
                         <div class="dragArea row" id="dragAreaRow1">
@@ -265,7 +286,14 @@
 </section>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script>
-    
+    $(function() {
+        $('#lunedi').multiselect({
+            includeSelectAllOption: true
+        });
+        $('#invia').click(function() {
+            alert($('#lunedi').val());
+        });
+    });
     
     $.ajax({
         url:"/getInfoProfilo",

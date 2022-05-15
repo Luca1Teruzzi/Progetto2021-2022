@@ -194,7 +194,6 @@
             var password=$('#password-form1-16').val();
             var tipoUtente=$('#typeUser-form7-1f').val();
             if (mail!="" && password!=""&&tipoUtente!=null) {
-                if(tipoUtente=="Studente"){
                     //Sistemare metodo ajax, obbligatorio con post
                     //Sistemare URL dati
                     //Sistemare invio dati
@@ -206,29 +205,11 @@
                         success: function (data) {
                             console.log("success", data);
                             //Aggiungere 2FA (Per ora porta subito all'homepage)
-                            window.location.assign('2FA.html?tipo="Studente"');
+                            window.location.assign('2FA.html');
                         },
                         error: function (data) {
                             console.log("error", data);
-                        },
-                    });
-                }
-                }else if(tipoUtente=="Diplomato"){
-                    //Sistemare metodo ajax, obbligatorio con post
-                    //Sistemare URL dati
-                    //Sistemare invio dati
-                    $.ajax({
-                        url:"",
-                        method: "POST",
-                        dataType: 'json',
-                        data: {"mail": mail,"password": password,"tipo": tipoUtente},
-                        success: function (data) {
-                            console.log("success", data);
-                            //Aggiungere 2FA (Per ora porta subito all'homepage)
-                            window.location.assign('2FA.html?tipo="Diplomao"');
-                        },
-                        error: function (data) {
-                            console.log("error", data);
+                            alert("Errore riscontrato");
                         },
                     });
                 }

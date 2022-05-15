@@ -93,6 +93,9 @@
                     </p>
                     
                     <div class="dragArea row" id="dragAreaRow1">
+                        <div class="col-lg-12 col-md-12 col-sm-12 form-group mb-3" data-for="username">
+                            <input type="text" name="username" placeholder="Username" data-form-field="username" class="form-control" value="" id="username-form7-1f">
+                        </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 form-group mb-3" data-for="name">
                             <input type="text" name="name" placeholder="Nome" data-form-field="name" class="form-control" value="" id="name-form7-1f">
                         </div>
@@ -204,9 +207,9 @@
             var eta=$('#eta-form7-1f').val();
             var genere=$('#gender-form7-1f').val();
             var tipoUtente=$('#typeUser-form7-1f').val();
+            var username=$('#username-form7-1f').val();
             //Per la verifica usare !="" per gli input text e !=null per le selezioni
             if(nome!=""&&cognome!=""&&mail!=""&&telefono!=""&&password!=""&&eta!=""&&genere!=null&&tipoUtente!=null){
-                if(tipoUtente=="Studente"){
                     //Sistemare metodo ajax, obbligatorio con post
                     //Sistemare URL dati
                     //Sistemare invio dati
@@ -214,7 +217,7 @@
                         url:"",
                         method: "POST",
                         dataType: 'json',
-                        data: {"nome": nome,"cognome": cognome, "mail": mail, "telefono": telefono,"password": password, "eta": eta, "genere": genere,"tipoUtente": tipoUtente},
+                        data: {"user": username,"nome": nome,"cognome": cognome, "email": mail, "telefono": telefono,"password": password, "eta": eta, "genere": genere,"tipoUtente": tipoUtente},
                         success: function (data) {
                         console.log("success", data);
                             //Aggiungere la verifica mail (Per ora porta subito all'homepage)
@@ -225,25 +228,7 @@
                         },
                     });
                 
-                }else if(tipoUtente=="Diplomato"){
-                    //Sistemare metodo ajax, obbligatorio con post
-                    //Sistemare URL dati
-                    //Sistemare invio dati
-                    $.ajax({
-                        url:"",
-                        method: "POST",
-                        dataType: 'json',
-                        data: {"nome": nome,"cognome": cognome, "mail": mail, "telefono": telefono,"password": password, "eta": eta, "genere": genere,"tipoUtente": tipoUtente},
-                        success: function (data) {
-                        console.log("success", data);
-                            //Aggiungere la verifica mail (Per ora porta subito all'homepage)
-                            window.location.assign("../homeDashboard/Homestudentidiplomati.html");
-                        },
-                        error: function (data) {
-                            console.log("error", data);
-                        },
-                    });
-                }
+               
             }
         })       
     </script>

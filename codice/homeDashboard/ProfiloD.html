@@ -211,13 +211,14 @@
                 $("#divAddComment").append('<div class="counter-container col-md-12 col-lg-10"><h4 class="mbr-section-title mbr-fonts-style mb-4 display-5" id="commenti">Aggiugni Commento</h4><div class="dragArea row"> <div class="col-md col-sm-12 form-group mb-3" data-for="commento"><input type="number" name="voto" placeholder="Voto" max="10" data-form-field="voto" class="form-control" value="" id="voto-form5-1j"><input type="text" name="commento" placeholder="Commento" data-form-field="commento" class="form-control" value="" id="commento-form5-1j"></div><div class="col-lg-12 col-md-12 col-sm-12 align-center mbr-section-btn"><button type="submit" class="btn btn-primary display-4" id="bottoneInviaCommento">Invia</button></div></div></div>');
                 var commento=$('#commento-form5-1j').val();
                 var voto=$('#voto-form5-1j').val();
+                var mail=data.mail;
                 if(voto!=null&&voto!=""&&commento!=null&&commento!=""){
                     $('#bottoneInviaCommento').click(function () {
                         $.ajax({
                             url:"/addComment",
                             method: "POST",
                             dataType: 'json',
-                            data: {"commento":commento,"user":usernameUtente,"voto":voto},
+                            data: {"commento":commento,"mail":mail,"voto":voto},
                             success: function (data) {
                                 var nome=data.nome;
                                 var cognome=data.cognome;

@@ -175,14 +175,7 @@
 </section>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script>
-    $(function() {
-        $('#lunedi').multiselect({
-            includeSelectAllOption: true
-        });
-        $('#invia').click(function() {
-            alert($('#lunedi').val());
-        });
-    });
+    
     
     $.ajax({
         url:"/getInfoProfilo",
@@ -241,9 +234,6 @@
 
             //Descrizione
             $("#divDescrizione").append('<div class="col-lg-12 col-md-12 col-sm-12 form-group mb-3" data-for="descrizione"><input type="text" name="Descrizione" placeholder="'+descrizione+'" data-form-field="descrizione" class="form-control" value="" id="descrizione-form7-1f"></div>');
-            
-            //Bottoni
-            $("#divBottoni").append('<div class="mbr-section-btn"><a href="#commenti" class="btn btn-primary display-4" id="commentiButton">Commenti</a></div>');
               
             
         },
@@ -278,8 +268,7 @@
     });
    
 </script>
-<!-- <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>  <script src="assets/smoothscroll/smooth-scroll.js"></script>  
-<script src="assets/ytplayer/index.js"></script>  <script src="assets/dropdown/js/navbar-dropdown.js"></script>  <script src="assets/theme/js/script.js"></script>   -->
+
   
   
   <input name="animation" type="hidden">
